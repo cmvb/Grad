@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Map.Entry;
 import javax.annotation.PostConstruct;
@@ -80,9 +81,9 @@ public class BaseServicioImpl implements IBaseServicio, Serializable {
             em.close();
 
             return id;
-        } catch (Exception e) {
-            LOG.error(e.getMessage());
-            throw new Exception(e);
+        } catch (Exception ex) {
+            LOG.error("|>>>>>>>> ERROR: " + new Date() + " - " + ex.getMessage(), ex);
+            throw new Exception(ex);
         }
     }
 

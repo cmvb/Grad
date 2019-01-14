@@ -1,6 +1,7 @@
 C:\Users\veracm\github\gradash-back\Grad\src\main\java\com\cmvb\gradash\servicios\IBaseServicio.java
 C:\Users\veracm\github\gradash-back\Grad\src\main\java\com\cmvb\gradash\rest\IRestController.java
 C:\Users\veracm\github\gradash-back\Grad\src\main\java\com\cmvb\gradash\entidades\AbstractEntity.java
+C:\Users\veracm\github\gradash-back\Grad\src\main\java\com\cmvb\gradash\responses\BaseResponse.java
 C:\Users\veracm\github\gradash-back\Grad\src\main\java\com\cmvb\gradash\util\Constantes.java
 C:\Users\veracm\github\gradash-back\Grad\src\main\java\com\cmvb\gradash\rest\RestService.java
 C:\Users\veracm\github\gradash-back\Grad\src\main\java\com\cmvb\gradash\enumerados\EMeses.java

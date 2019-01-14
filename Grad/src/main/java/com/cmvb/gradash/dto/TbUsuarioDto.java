@@ -94,16 +94,16 @@ public class TbUsuarioDto implements Serializable {
 
     public String getNombreCompleto() {
         String nombre = "";
-        if (!Util.vacio(this.primerNombre)) {
+        if (!Util.esVacio(this.primerNombre)) {
             nombre = nombre + this.primerNombre;
         }
-        if (!Util.vacio(this.segundoNombre)) {
+        if (!Util.esVacio(this.segundoNombre)) {
             nombre = nombre + this.segundoNombre;
         }
-        if (!Util.vacio(this.primerApellido)) {
+        if (!Util.esVacio(this.primerApellido)) {
             nombre = nombre + this.primerApellido;
         }
-        if (!Util.vacio(this.segundoApellido)) {
+        if (!Util.esVacio(this.segundoApellido)) {
             nombre = nombre + this.segundoApellido;
         }
         return nombre;

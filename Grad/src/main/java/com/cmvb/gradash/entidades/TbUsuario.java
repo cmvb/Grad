@@ -6,6 +6,7 @@
 package com.cmvb.gradash.entidades;
 
 import static com.cmvb.gradash.util.Constantes.SCHEMA_BD;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Entity
 @NamedQuery(name = "TbUsuario.findAll", query = "SELECT t FROM TbUsuario t")
 @Table(name = "tb_usuario", schema = SCHEMA_BD)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TbUsuario extends AbstractEntity implements Serializable {
 
     private static final long serialVersionUID = -532773761282260328L;

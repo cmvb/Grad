@@ -6,6 +6,7 @@
 package com.cmvb.gradash.entidades;
 
 import static com.cmvb.gradash.util.Constantes.SCHEMA_BD;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,6 +25,7 @@ import lombok.Setter;
 @Entity
 @NamedQuery(name = "TbConsecutivo.findAll", query = "SELECT t FROM TbConsecutivo t")
 @Table(name = "tb_consecutivo", schema = SCHEMA_BD)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class TbConsecutivo implements Serializable {
 
     private static final long serialVersionUID = 1640011313652512129L;

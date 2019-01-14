@@ -87,6 +87,7 @@ com\cmvb\gradash\enumerados\EEstado$1.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$26.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$74.class
 com\cmvb\gradash\serviciosImpl\SeguridadServicioImpl.class
+com\cmvb\gradash\responses\BaseResponse.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$11.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$7.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$31.class

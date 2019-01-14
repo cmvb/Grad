@@ -41,6 +41,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 
 import javolution.util.FastList;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -223,11 +224,11 @@ public final class Util {
      * @param cadena
      * @return
      */
-    public static boolean vacio(String cadena) {
+    public static boolean esVacio(String cadena) {
         if (cadena == null) {
             return true;
         } else {
-            return cadena.length() == 0 || cadena.equals("null");
+            return cadena.length() == 0 || cadena.equals("null") || StringUtils.isBlank(cadena) || StringUtils.isEmpty(cadena);
         }
     }
 
@@ -279,8 +280,8 @@ public final class Util {
      * @param criterio
      * @return
      */
-    public static String transformParameters(String texto, ECriterioBusqueda criterio) {
-        if (vacio(texto)) {
+    public static String incluirCriterio(String texto, ECriterioBusqueda criterio) {
+        if (esVacio(texto)) {
             return "%";
         }
         switch (criterio) {
@@ -817,7 +818,7 @@ public final class Util {
      */
     public static boolean esCorreo(String correo) {
         try {
-            if (vacio(correo)) {
+            if (esVacio(correo)) {
                 return true;
             }
             Pattern pat = null;

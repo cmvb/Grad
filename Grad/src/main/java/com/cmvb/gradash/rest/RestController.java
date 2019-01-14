@@ -7,10 +7,14 @@ package com.cmvb.gradash.rest;
 
 import com.cmvb.gradash.dto.TbUsuarioDto;
 import com.cmvb.gradash.entidades.TbUsuario;
+import com.cmvb.gradash.enumerados.EEstadoRespuestaHTTP;
+import com.cmvb.gradash.responses.BaseResponse;
 import com.cmvb.gradash.serviciosImpl.SeguridadServicioImpl;
 import com.cmvb.gradash.serviciosImpl.UsuariosServicioImpl;
+import com.cmvb.gradash.util.Util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ws.rs.*;
@@ -41,21 +45,6 @@ public class RestController implements Serializable, IRestController {
     @Autowired
     private static final SeguridadServicioImpl seguridadSB = new SeguridadServicioImpl();
 
-    @GET //Indicamos que este método se ejecutará al recibir una petición por get
-    @Path("/findAllUsuarios")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @CrossOrigin
-    @Override
-    public List<TbUsuario> findAllUsuarios() {
-        try {
-            return usuarioSB.findAllUsuarios();
-        } catch (Exception e) {
-            LOG.error(e.getMessage());
-            return null;
-        }
-    }
-
     @POST
     @Path("/login")
     @Consumes({MediaType.APPLICATION_JSON}) // -->recibir json
@@ -67,9 +56,83 @@ public class RestController implements Serializable, IRestController {
             TbUsuarioDto dto = mapper.readValue(Json, TbUsuarioDto.class);
 
             return seguridadSB.login(dto.getUsuario(), dto.getClave());
-        } catch (Exception e) {
-            LOG.error(e.getMessage());
+        } catch (Exception ex) {
+            LOG.error("|>>>>>>>> ERROR: " + new Date() + " - " + ex.getMessage(), ex);
             return null;
+        }
+    }
+
+    @GET
+    @Path("/findAllUsuarios")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @CrossOrigin
+    @Override
+    public List<TbUsuario> findAllUsuarios() {
+        try {
+            return usuarioSB.findAllUsuarios();
+        } catch (Exception ex) {
+            LOG.error("|>>>>>>>> ERROR: " + new Date() + " - " + ex.getMessage(), ex);
+            return null;
+        }
+    }
+
+    @POST
+    @Path("/getUsuarios")
+    @Consumes({MediaType.APPLICATION_JSON}) // -->recibir json
+    @Produces({MediaType.APPLICATION_JSON}) // -->regresar json
+    @Override
+    public List<TbUsuario> getUsuarios(@RequestBody String Json) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            TbUsuario usuario = mapper.readValue(Json, TbUsuario.class);
+
+            return usuarioSB.getUsuarios(usuario);
+        } catch (Exception ex) {
+            LOG.error("|>>>>>>>> ERROR: " + new Date() + " - " + ex.getMessage(), ex);
+            return null;
+        }
+    }
+
+    @POST
+    @Path("/saveUpdateUsuario")
+    @Consumes({MediaType.APPLICATION_JSON}) // -->recibir json
+    @Produces({MediaType.APPLICATION_JSON}) // -->regresar json
+    @Override
+    public BaseResponse saveUpdateUsuario(@RequestBody String Json) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            TbUsuario usuario = mapper.readValue(Json, TbUsuario.class);
+
+            return usuarioSB.saveUpdateUsuario(usuario);
+        } catch (Exception ex) {
+            LOG.error("|>>>>>>>> ERROR: " + new Date() + " - " + ex.getMessage(), ex);
+            BaseResponse errorResponse = new BaseResponse();
+            errorResponse.setCodigo(EEstadoRespuestaHTTP.ERROR_BD_NO_CONEXION.getId());
+            errorResponse.setValor(false);
+            errorResponse.setDescripcion(EEstadoRespuestaHTTP.ERROR_BD_NO_CONEXION.getMessage(Util.LOCALIDAD) + " - Traza de error JAVA: " + ex.getMessage());
+            return errorResponse;
+        }
+    }
+
+    @POST
+    @Produces({MediaType.APPLICATION_JSON}) // -->regresar json
+    @Consumes({MediaType.APPLICATION_JSON}) // -->recibir json
+    @Path("/deleteUsuario")
+    @Override
+    public BaseResponse deleteUsuario(@RequestBody String Json) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            TbUsuario usuario = mapper.readValue(Json, TbUsuario.class);
+            
+            return usuarioSB.deleteUsuario(usuario);
+        } catch (Exception ex) {
+            LOG.error("|>>>>>>>> ERROR: " + new Date() + " - " + ex.getMessage(), ex);
+            BaseResponse errorResponse = new BaseResponse();
+            errorResponse.setCodigo(EEstadoRespuestaHTTP.ERROR_BD_NO_CONEXION.getId());
+            errorResponse.setValor(false);
+            errorResponse.setDescripcion(EEstadoRespuestaHTTP.ERROR_BD_NO_CONEXION.getMessage(Util.LOCALIDAD) + " - Traza de error JAVA: " + ex.getMessage());
+            return errorResponse;
         }
     }
 }

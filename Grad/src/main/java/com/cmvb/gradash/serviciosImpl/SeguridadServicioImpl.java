@@ -178,9 +178,9 @@ public class SeguridadServicioImpl implements ISeguridadServicio, Serializable {
             em.close();
 
             return result.getFirst();
-        } catch (Exception e) {
-            LOG.error(e.getMessage());
-            throw new Exception(e);
+        } catch (Exception ex) {
+            LOG.error("|>>>>>>>> ERROR: " + new Date() + " - " + ex.getMessage(), ex);
+            throw new Exception(ex);
         }
     }
 
@@ -204,9 +204,9 @@ public class SeguridadServicioImpl implements ISeguridadServicio, Serializable {
             em.close();
 
             return true;
-        } catch (Exception e) {
-            LOG.error(e.getMessage());
-            throw new Exception(e);
+        } catch (Exception ex) {
+            LOG.error("|>>>>>>>> ERROR: " + new Date() + " - " + ex.getMessage(), ex);
+            throw new Exception(ex);
         }
     }
 
