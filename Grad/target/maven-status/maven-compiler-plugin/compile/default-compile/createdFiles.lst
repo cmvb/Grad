@@ -125,9 +125,11 @@ com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$10.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$20.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$101.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$90.class
+com\cmvb\gradash\entidades\TbClub.class
 com\cmvb\gradash\enumerados\IEnum.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$67.class
 com\cmvb\gradash\enumerados\ESiNo$2.class
+com\cmvb\gradash\entidades\TbJugador.class
 com\cmvb\gradash\entidades\TbUsuario.class
 com\cmvb\gradash\servicios\ISeguridadServicio.class
 com\cmvb\gradash\util\NextValues.class
@@ -155,4 +157,5 @@ com\cmvb\gradash\util\Constantes.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$56.class
 com\cmvb\gradash\enumerados\ESiNo$1.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$108.class
+com\cmvb\gradash\entidades\TbPais.class
 com\cmvb\gradash\enumerados\EEstadoRespuestaHTTP$6.class

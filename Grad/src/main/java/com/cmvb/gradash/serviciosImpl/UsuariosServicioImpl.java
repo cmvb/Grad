@@ -83,13 +83,11 @@ public class UsuariosServicioImpl implements IUsuariosServicio, Serializable {
                 sql.append(" AND t.estado = :estadoActivo ");
                 map.put("estadoActivo", ESiNo.SI.getId());
 
-//                sql.append("ORDER BY t ");
-                sql.append("LIMIT 900 OFFSET ");
-                sql.append(rowsRead);
-//                sql.append(" ROWS ");
-//                sql.append("FETCH NEXT 900 ROW ONLY ");
+                sql.append("ORDER BY t.idUsuario ");
 
                 query = em.createQuery(sql.toString());
+                query.setFirstResult(Integer.parseInt(String.valueOf(rowsRead)));
+                query.setMaxResults(Integer.parseInt(String.valueOf(Util.MAX_RESULT_BD)));
                 for (Entry<String, Object> valor : map.entrySet()) {
                     query.setParameter(valor.getKey(), valor.getValue());
                 }
@@ -101,7 +99,6 @@ public class UsuariosServicioImpl implements IUsuariosServicio, Serializable {
                     }
 
                     rowsRead = rowsRead + internalResult.size();
-                    rows = rows - rowsRead;
                     result.addAll(internalResult);
                 }
             }
@@ -233,12 +230,10 @@ public class UsuariosServicioImpl implements IUsuariosServicio, Serializable {
                 }
 
                 sql.append("ORDER BY t.idUsuario ");
-                sql.append("OFFSET ");
-                sql.append(rowsRead);
-                sql.append(" ROWS ");
-                sql.append("FETCH NEXT 900 ROW ONLY ");
 
                 query = em.createQuery(sql.toString());
+                query.setFirstResult(Integer.parseInt(String.valueOf(rowsRead)));
+                query.setMaxResults(Integer.parseInt(String.valueOf(Util.MAX_RESULT_BD)));
                 for (Entry<String, Object> valor : map.entrySet()) {
                     query.setParameter(valor.getKey(), valor.getValue());
                 }
@@ -250,7 +245,6 @@ public class UsuariosServicioImpl implements IUsuariosServicio, Serializable {
                     }
 
                     rowsRead = rowsRead + internalResult.size();
-                    rows = rows - rowsRead;
                     result.addAll(internalResult);
                 }
             }
@@ -300,7 +294,8 @@ public class UsuariosServicioImpl implements IUsuariosServicio, Serializable {
             EntityManager em = emf.createEntityManager();
             EntityTransaction tx = em.getTransaction();
             tx.begin();
-            em.remove(usuario);
+            TbUsuario user = em.find(TbUsuario.class, usuario.getIdUsuario());
+            em.remove(user);
 
             tx.commit();
             em.close();

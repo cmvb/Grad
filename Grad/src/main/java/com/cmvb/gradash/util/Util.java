@@ -48,6 +48,10 @@ import org.slf4j.LoggerFactory;
 public final class Util {
 
     private static final Logger LOG = LoggerFactory.getLogger(Util.class);
+    
+    
+    public static final String LOCALIDAD = "es";
+    public static final long MAX_RESULT_BD = 900;
 
     public static final String CLIENT_DATE_FORMAT = "yyyy/MM/dd";
     public static final String DB_DATE_FORMAT = "yyyy/MM/dd";
@@ -104,7 +108,6 @@ public final class Util {
     public static final int SALIDA_WHILE = 10000;
 
     public static final String CHAR_SET = "ISO-8859-1";
-    public static final String LOCALIDAD = "es";
 
     public static final int MAX_ROW_AUTOCOMPLETE = 100;
     public static final int MAX_RESULT = 500;

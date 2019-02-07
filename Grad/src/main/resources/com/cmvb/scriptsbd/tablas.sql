@@ -61,3 +61,56 @@ CREATE TABLE gradash.tb_sesion (
 	CONSTRAINT tb_sesion_un UNIQUE (ses_token_sesion)
 );
 
+/*TABLA TB_PAIS*/
+CREATE TABLE gradash.tb_pais (
+	pais_id_pais int8 NOT NULL,
+	pais_nombre_pais varchar(20) NOT NULL,
+	pais_cantidad_copas int8 NOT NULL DEFAULT 0,
+	pais_mejor_participacion varchar(50) NULL,
+	estado int2 NOT NULL,
+	fecha_creacion timestamp NOT NULL,
+	usuario_creacion varchar(20) NOT NULL,
+	fecha_actualiza timestamp NOT NULL,
+	usuario_actualiza varchar(20) NOT NULL,
+	CONSTRAINT tb_pais_pk PRIMARY KEY (pais_id_pais)
+);
+
+/*TABLA TB_CLUB*/
+CREATE TABLE gradash.tb_club (
+	club_id_club int8 NOT NULL,
+	club_id_pais int8 NOT NULL,
+	club_nombre_club varchar(20) NOT NULL,
+	club_cantidad_copas int8 NULL,
+	club_mejor_participacion varchar(50) NULL,
+	estado int2 NOT NULL,
+	fecha_creacion varchar NOT NULL,
+	usuario_creacion varchar(20) NOT NULL,
+	fecha_actualiza varchar NOT NULL,
+	usuario_actualiza varchar(20) NULL,
+	CONSTRAINT tb_club_pk PRIMARY KEY (club_id_club),
+	CONSTRAINT tb_club_tb_pais_fk FOREIGN KEY (club_id_pais) REFERENCES gradash.tb_pais(pais_id_pais)
+);
+
+/*TABLA TB_JUGADOR*/
+CREATE TABLE gradash.tb_jugador (
+	jug_id_jugador int8 NOT NULL,
+	jug_numero_jugador int8 NOT NULL,
+	jug_nombre_jugador varchar(50) NOT NULL,
+	jug_apellido_jugador varchar(50) NOT NULL,
+	jug_id_pais int8 NOT NULL,
+	jug_id_club int8 NULL,
+	jug_lesionado int2 NULL,
+	jug_sancionado_club int2 NULL,
+	jug_sancionado_pais int2 NULL,
+	jug_posicion int2 NOT NULL,
+	jug_habilidad_pie int2 NOT NULL,
+	estado int2 NOT NULL,
+	fecha_creacion timestamp NOT NULL,
+	usuario_creacion varchar(20) NOT NULL,
+	fecha_actualiza timestamp NOT NULL,
+	usuario_actualiza varchar(20) NOT NULL,
+	CONSTRAINT tb_jugador_pk PRIMARY KEY (jug_id_jugador),
+	CONSTRAINT tb_jugador_tb_pais_fk FOREIGN KEY (jug_id_pais) REFERENCES gradash.tb_pais(pais_id_pais),
+	CONSTRAINT tb_jugador_tb_club_fk FOREIGN KEY (jug_id_club) REFERENCES gradash.tb_club(club_id_club)
+);
+
